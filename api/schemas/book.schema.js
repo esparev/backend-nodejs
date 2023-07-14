@@ -6,7 +6,7 @@ const isbn = Joi.string().max(255);
 const title = Joi.string().max(500);
 const author = Joi.string().max(255);
 const releaseDate = Joi.date().iso();
-const usersId = Joi.number().integer().min(1);
+const userId = Joi.number().integer().min(1);
 
 /**
  * Schema to validate the getBook request
@@ -23,7 +23,7 @@ const createBookSchema = Joi.object({
 	title: title.required(),
 	author: author.required(),
 	releaseDate: releaseDate.required(),
-	usersId: usersId.required(),
+	userId: userId.required(),
 });
 
 /**
@@ -34,7 +34,7 @@ const updateBookSchema = Joi.object({
 	title,
 	author,
 	releaseDate,
-	usersId,
+	userId,
 });
 
 module.exports = { getBookSchema, createBookSchema, updateBookSchema };

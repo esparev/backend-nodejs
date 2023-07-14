@@ -33,7 +33,7 @@ const BookSchema = {
 	},
 	userId: {
 		allowNull: false,
-		field: 'users_id',
+		field: 'user_id',
 		type: DataTypes.INTEGER,
 		references: {
 			model: USER_TABLE,
