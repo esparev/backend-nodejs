@@ -38,8 +38,14 @@ const createBook = async (req, res, next) => {
 		const userId = jsonwebtoken.decode(token)?.sub;
 
 		const body = req.body;
-		const newBook = await service.create({ ...body, userId: userId });
-		res.status(201).json({ newBook, message: 'book created' });
+		let isbn = body.isbn;
+
+		if (body.isbn.includes('-')) {
+			isbn = body.isbn.replace(/-/g, '');
+		}
+
+		const newBook = await service.create({ ...body, isbn: isbn, userId: userId });
+		res.status(201).json({ newBook: newBook.id, message: 'book created' });
 	} catch (error) {
 		next(error);
 	}
