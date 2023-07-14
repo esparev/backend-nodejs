@@ -53,10 +53,10 @@ class AuthService {
 	signToken(user) {
 		const payload = { sub: user.id, username: user.username, role: user.role };
 
-		const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '1m' });
+		const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '24h' });
 		delete user.dataValues.recoveryToken;
 
-		return { user, token };
+		return { token };
 	}
 }
 
