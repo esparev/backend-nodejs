@@ -1,6 +1,7 @@
 // @ts-check
 const express = require('express');
 const passport = require('passport');
+const jsonwebtoken = require('jsonwebtoken');
 const BookService = require('../services/book.service');
 const validatorHandler = require('../../middlewares/validator.handler');
 
@@ -33,8 +34,11 @@ const getBook = async (req, res, next) => {
 
 const createBook = async (req, res, next) => {
 	try {
+		const token = req.headers.authorization.split(' ')[1];
+		const userId = jsonwebtoken.decode(token)?.sub;
+
 		const body = req.body;
-		const newBook = await service.create(body);
+		const newBook = await service.create({ ...body, userId: userId });
 		res.status(201).json({ newBook, message: 'book created' });
 	} catch (error) {
 		next(error);

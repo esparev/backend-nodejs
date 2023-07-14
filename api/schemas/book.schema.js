@@ -23,7 +23,7 @@ const createBookSchema = Joi.object({
 	title: title.required(),
 	author: author.required(),
 	releaseDate: releaseDate.required(),
-	userId: userId.required(),
+	userId,
 });
 
 /**
