@@ -10,6 +10,10 @@ const {
 	boomErrorHandler,
 } = require('./middlewares/error.handler');
 
+/**
+ * Creates an express application with all middlewares and routes.
+ * @returns {express.Application} express app
+ */
 const createApp = () => {
 	const app = express();
 
@@ -18,8 +22,10 @@ const createApp = () => {
 		max: 100, // limit each IP to 100 requests per windowMs
 	});
 
+	// Import passport strategies
 	require('./utils/auth');
 
+	// Express middlewares
 	app.use(limiter);
 	app.use(passport.initialize());
 	app.use(express.json());
@@ -27,6 +33,7 @@ const createApp = () => {
 
 	routerApi(app);
 
+	// Error middleware handlers
 	app.use(boomErrorHandler);
 	app.use(ormErrorHandler);
 	app.use(errorHandler);

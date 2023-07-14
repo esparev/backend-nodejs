@@ -13,6 +13,9 @@ const {
 	updateBookSchema,
 } = require('../schemas/book.schema');
 
+/**
+ * Get all books.
+ */
 const getBooks = async (req, res, next) => {
 	try {
 		const books = await service.find();
@@ -22,6 +25,9 @@ const getBooks = async (req, res, next) => {
 	}
 };
 
+/**
+ * Get a book by id.
+ */
 const getBook = async (req, res, next) => {
 	try {
 		const { id } = req.params;
@@ -32,6 +38,10 @@ const getBook = async (req, res, next) => {
 	}
 };
 
+/**
+ * Create a new book and assign it to the user who created it.
+ * Plus, it removes the dashes from the isbn.
+ */
 const createBook = async (req, res, next) => {
 	try {
 		const token = req.headers.authorization.split(' ')[1];
@@ -44,13 +54,20 @@ const createBook = async (req, res, next) => {
 			isbn = body.isbn.replace(/-/g, '');
 		}
 
-		const newBook = await service.create({ ...body, isbn: isbn, userId: userId });
+		const newBook = await service.create({
+			...body,
+			isbn: isbn,
+			userId: userId,
+		});
 		res.status(201).json({ newBook: newBook.id, message: 'book created' });
 	} catch (error) {
 		next(error);
 	}
 };
 
+/**
+ * Update a book by id.
+ */
 const updateBook = async (req, res, next) => {
 	try {
 		const { id } = req.params;
@@ -62,6 +79,9 @@ const updateBook = async (req, res, next) => {
 	}
 };
 
+/**
+ * Delete a book by id.
+ */
 const deleteBook = async (req, res, next) => {
 	try {
 		const { id } = req.params;

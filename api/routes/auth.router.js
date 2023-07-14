@@ -23,6 +23,9 @@ async function login(req, res, next) {
 	}
 }
 
+/**
+ * Register function to create a new user.
+ */
 const register = async (req, res, next) => {
 	try {
 		await userService.create(req.body);

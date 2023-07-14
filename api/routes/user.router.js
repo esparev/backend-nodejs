@@ -8,6 +8,9 @@ const router = express.Router();
 const service = new UserService();
 const { getUserSchema, updateUserSchema } = require('../schemas/user.schema');
 
+/**
+ * Get all users.
+ */
 const getUsers = async (req, res, next) => {
 	try {
 		const users = await service.find();
@@ -17,6 +20,9 @@ const getUsers = async (req, res, next) => {
 	}
 };
 
+/**
+ * Get a user by id.
+ */
 const getUser = async (req, res, next) => {
 	try {
 		const { id } = req.params;
@@ -27,6 +33,9 @@ const getUser = async (req, res, next) => {
 	}
 };
 
+/**
+ * Update a user by id.
+ */
 const updateUser = async (req, res, next) => {
 	try {
 		const { id } = req.params;
@@ -38,6 +47,9 @@ const updateUser = async (req, res, next) => {
 	}
 };
 
+/**
+ * Delete a user by id.
+ */
 const deleteUser = async (req, res, next) => {
 	try {
 		const { id } = req.params;
