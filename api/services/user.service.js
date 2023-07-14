@@ -35,7 +35,9 @@ class UserService {
 	 * @returns {Promise<Array>} Array with all users
 	 */
 	async find() {
-		const users = await models.User.findAll();
+		const users = await models.User.findAll({
+			attributes: { exclude: ['password'] },
+		});
 		return users;
 	}
 
@@ -45,7 +47,9 @@ class UserService {
 	 * @returns {Promise<Object>} Object with the user
 	 */
 	async findOne(id) {
-		const user = await models.User.findByPk(id);
+		const user = await models.User.findByPk(id, {
+			attributes: { exclude: ['password'] },
+		});
 		if (!user) {
 			throw boom.notFound('User not found');
 		}

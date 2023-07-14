@@ -32,7 +32,15 @@ class BookService {
 	 * @returns {Promise<Array>} Array with all books
 	 */
 	async find() {
-		const books = await models.Book.findAll();
+		const books = await models.Book.findAll({
+			include: [
+				{
+					as: 'user',
+					model: models.User,
+					attributes: { exclude: ['password'] },
+				},
+			],
+		});
 		return books;
 	}
 
@@ -42,7 +50,15 @@ class BookService {
 	 * @returns {Promise<Object>} Object with the book
 	 */
 	async findOne(id) {
-		const book = await models.Book.findByPk(id);
+		const book = await models.Book.findByPk(id, {
+			include: [
+				{
+					as: 'user',
+					model: models.User,
+					attributes: { exclude: ['password'] },
+				},
+			],
+		});
 		if (!book) {
 			throw boom.notFound('Book not found');
 		}
