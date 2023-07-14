@@ -10,14 +10,14 @@
  * const options = modelOptions(false, 'Gift', GIFT_TABLE);
  * ```
  *
- * @param {boolean} timestamp - if the model should have timestamps
+ * @param {boolean} timestamps - if the model should have timestampss
  * @param {string} modelName - the model name
  * @param {string} tableName - the table name
  * @returns {object} the model's options
  */
-const modelOptions = (timestamp, modelName, tableName) => {
+const modelOptions = (timestamps, modelName, tableName) => {
 	return {
-		timestamp: timestamp || false,
+		timestamps: timestamps || false,
 		modelName: modelName,
 		tableName: tableName,
 	};
