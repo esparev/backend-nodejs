@@ -29,9 +29,9 @@ const BookSchema = {
 	releaseDate: {
 		allowNull: false,
 		field: 'release_date',
-		type: DataTypes.DATE,
+		type: DataTypes.DATEONLY,
 	},
-	usersId: {
+	userId: {
 		allowNull: false,
 		field: 'users_id',
 		type: DataTypes.INTEGER,
